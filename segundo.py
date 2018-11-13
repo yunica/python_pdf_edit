@@ -10,6 +10,47 @@ tipo_usuario_choise = ['ACTIVA', 'FACTIBLE', 'POTENCIAL', 'CLANDESTINA', ]
 tipo_interior_choise = ['DEPARTAMENTO', 'OFICINA', 'TIENDA', 'LOCAL', 'OTRO', 'OTRO']
 tipo_documento_identidad_choise = ["L.E / DNI", "RUC", "CARNET EXTRANJERIA.", "PASAPORTE", "P. NAC."]
 tipo_persona_entrevistada_choise = ['PROPIETARIO', 'INQUILINO', 'ENTIDAD PUBLICA/PRIVADA', 'FAMILIAR DIRECTO', 'OTRO']
+# 7
+tipo_situacion_predio_choise = ['EDIFICADO', 'EN CONSTRUCCION', 'LOTE CERDADO', 'LOTE VACIO', 'DESOCUPADO', 'OTRO']
+tipo_predio_choise = ['VIVIENDA UNIFAMILIAR', 'EDIFICIO MULTIFAMILIAR', 'QUINTA SOLAR', 'COMERCIAL', 'INDUSTRIAL',
+                      'INTITUCION PUBLICA', 'INTITUCION PRIVADA', 'PARQUE O BERMA', 'OTRO']
+tipo_material_predio_choise = ['NOBLE', 'ADOBE', 'QUINCHA', 'MADERA', 'OTRO']
+tipo_servicio_choise = ['AGUA DESAGUE', 'SOLO AGUA', 'SOLO DESAGUE', 'NINGUNO']
+tipo_medio_abastecimiento_choise = ['INTRADOMICILIARIA', 'CAMION CISTERNA', 'PILETA PUBLICA', 'FUENTE PROPIA', 'OTRO']
+tipo_almacenamiento_choise = ['TANQUE ELEVADO', 'CISTERNA', 'POZA', 'PISCINA', 'NO ALMACENA', 'OTRO']
+
+# 8
+tipo_unidad_uso_choise = ['SOCIAL', 'DOMESTICO', 'COMERCIAL', 'INDUSTRIAL', 'ESTATAL']
+# 9
+ubicacion_caja_conex_choise = ['VEREDA', 'PISTA', 'JARDIN EXTERIOR', 'INTERIOR PREDIO', 'OTRO', 'NO UBICADA']
+estado_conex_choise = ['CON MEDIDOR', 'NIPLE', 'DIRECTO', 'OTRO']
+condicion_conex_choise = ['ACTIVA', 'CORTADA', 'MECHA', 'INACTIVA']
+tipo_conex_choise = ['NORMAL', 'CUENTA DE CONTROL', 'PILETA PUBLICA', 'CONEXION ESPECIAL', ]
+material_conex_choise = ['PVC', 'FIERRO GALVANIZADO', 'POLIETILENO', 'OTRO']
+diametro_conex_choise = ['1/2-15mm', '3/4-20mm', '1-25mm', '2-50mm', '4-100mm', '6-150mm', 'OTRO']
+llave_paso_conex_choise = ['ANTES Y DESPUES', 'ANTES - PRIMERA', 'DESPUES - SEGUNDA', 'SIN LLAVE']
+material_caja_conex_choise = ['CONCRETO', 'TERMOPLASTICO', 'LADRILLO', 'OTRO']
+estado_caja_conex_choise = ['BUENO', 'MAL ESTADO']
+# fuga_conex_choise
+material_tapa_marco_conex_choise = ['FIERRO GALVANIZADO', 'FIERRO FUNDIDO', 'TERMOPLASTICO', 'CONCRETO', 'NO TIENE',
+                                    'OTRO']
+# 10
+# estado_tapa_marco_conex_choise
+diametro_medidor_choise = ['1/2-15mm', '3/4-20mm', '1-25mm', '1 1/2-40mm', '2-50mm', '3-80mm', '4-100mm', '6-150mm',
+                           'OTRO']
+marca_medidor_choise = ['ELSTER', 'ACTARIS', 'IBERCONTA', 'SCHLUMBERGER', 'ZENNER', 'INCA', 'KENT', 'ABB', 'DH',
+                        'NINGUNO', 'OTRO']
+estado_medidor_choise = ['OPERATIVO', 'LUNA EMPANIADA', 'CAPSULA ROTA/QUEMADA', 'REGISTRO SUELTO', 'MANECILLAS SUELTAS',
+                         'OTRO']
+accesorio_seguridad_medidor_choise = ['SIN DISPOSITIVO', 'PRECINTO PVC (1 PZA)', 'PRECINTO COBRE (1 PZA)', 'ANCLAJE',
+                                      'OTRO']
+
+# ubicacion_caja_conex_desague_choise =
+diametro_conex_desague_choise = ['4-100mm', '6-150mm', '8-150mm', 'OTRO']
+condicion_conex_desague_choise = ['ACTIVA', 'CORTADA', 'SIN CONEXION', 'OTRO']
+# material_conex_desague_choise
+estado_tapa_caja_registro_choise = ['BUENO', 'MAL ESTADO', 'OTRO']
+material_tapa_desague_choise = ['FIERRO GALVANIZADO', 'FIERRO FUNDIDO', 'CONCRETO', 'NO TIENE', 'OTRO']
 
 
 def ficha_num(txt='123456', canv=None):
@@ -76,6 +117,32 @@ class Lista():
         except Exception:
             print(Exception.__str__())
 
+    def crear_bloque_vertical(self):
+        ubiysum = self.ubiy
+        self.listaobj = []
+        try:
+            if not self.lubiy:
+                for i in self.choise:
+                    opunto = Punto(self.ubix, ubiysum, str(i))
+                    ubiysum -= self.separacion
+                    self.listaobj.append(opunto)
+            else:
+                for i, y in enumerate(self.lubiy):
+                    opunto = Punto(self.ubix, y, self.choise[i])
+                    self.listaobj.append(opunto)
+        except Exception:
+            print(Exception.__str__())
+
+    def crear_bloque_especial(self):
+        self.listaobj = []
+        try:
+            if len(self.lubix) > 0 and len(self.lubiy) > 0:
+                for i, txt in enumerate(self.choise):
+                    opunto = Punto(self.lubix[i], self.lubiy[i], str(txt))
+                    self.listaobj.append(opunto)
+        except Exception:
+            print(Exception.__str__())
+
     def get_punto(self):
         if self.text and self.listaobj:
             if self.text in self.choise:
@@ -103,8 +170,6 @@ can = canvas.Canvas(packet, pagesize=legal)
 # text
 can.setFillColor(black)
 can.setFont("Helvetica", 12)
-can.setFontSize()
-can.drawString(124, 109, "X")
 # 1
 can = ficha_num(canv=can)
 # 2
@@ -171,7 +236,7 @@ else:
 
 can = texto_separado(txt='FLORES', ubix=45, ubiy=412, canv=can)
 can = texto_separado(txt='MARTINEZ', ubix=290, ubiy=412, canv=can)
-can = texto_separado(txt='JUNIOR GROVER', ubix=45, ubiy=386, canv=can)
+can = texto_separado(txt='JUNIOR GROVER', ubix=45, ubiy=387, canv=can)
 
 olist = Lista(choise=tipo_documento_identidad_choise, ubiy=359, lubix=[51, 83, 113, 166, 166], text='P. NAC.')
 olist.crear_bloque_horizontal()
@@ -182,7 +247,7 @@ if 'PASAPORTE' in ["PASAPORTE", "P. NAC."]:
 can = texto_separado(txt='70804143', ubix=248, ubiy=358, isseparado=False, canv=can)
 can = texto_separado(txt='327855', ubix=362, ubiy=358, isseparado=False, canv=can)
 can = texto_separado(txt='966 288 465', ubix=455, ubiy=358, isseparado=False, canv=can)
-can = texto_separado(txt='www .gooogle. com', ubix=140, ubiy=336, isseparado=False, canv=can)
+can = texto_separado(txt='www .gooogle. com', ubix=140, ubiy=335, isseparado=False, canv=can)
 can = texto_separado(txt='FLORES', ubix=45, ubiy=309, canv=can)
 can = texto_separado(txt='MARTINEZ', ubix=220, ubiy=309, canv=can)
 can = texto_separado(txt='JUNIOR GROVER', ubix=370, ubiy=309, canv=can)
@@ -199,16 +264,83 @@ if olist.get_otro():
 
 can = texto_separado(txt='freesoftandskate@gmail.com', ubix=448, ubiy=290, txtsize=9, isseparado=False, canv=can)
 
+# 7
+olist = Lista(choise=tipo_situacion_predio_choise, ubix=52, lubiy=[248, 237, 226, 216, 206, 193], text='OTRO',
+              otro=True, ubixotro=77, ubiyotro=196, otrotext='asdasdasd')
+olist.crear_bloque_vertical()
+can.drawString(olist.get_punto().ubix, olist.get_punto().ubiy, 'X')
+if olist.get_otro():
+    can = texto_separado(txt=olist.get_otro().txt, ubix=olist.get_otro().ubix, ubiy=olist.get_otro().ubiy, txtsize=7,
+                         isseparado=False, canv=can)
+
+olist = Lista(choise=tipo_predio_choise, lubix=[124, 124, 124, 124, 124, 186, 186, 186, 186],
+              lubiy=[248, 237, 226, 216, 206, 248, 237, 226, 216 ], text='OTRO',
+              otro=True, ubixotro=211, ubiyotro=219, otrotext='asdasdasd')
+olist.crear_bloque_especial()
+can.drawString(olist.get_punto().ubix, olist.get_punto().ubiy, 'X')
+if olist.get_otro():
+    can = texto_separado(txt=olist.get_otro().txt, ubix=olist.get_otro().ubix, ubiy=olist.get_otro().ubiy, txtsize=7,
+                         isseparado=False, canv=can)
+
+olist = Lista(choise=tipo_material_predio_choise, ubix=267, lubiy=[248, 237, 226, 216, 206], text='OTRO')
+olist.crear_bloque_vertical()
+can.drawString(olist.get_punto().ubix, olist.get_punto().ubiy, 'X')
+
+olist = Lista(choise=tipo_servicio_choise, ubix=340, lubiy=[248, 237, 226, 216], text='AGUA DESAGUE')
+olist.crear_bloque_vertical()
+can.drawString(olist.get_punto().ubix, olist.get_punto().ubiy, 'X')
+
+olist = Lista(choise=tipo_medio_abastecimiento_choise, ubix=411, lubiy=[248, 237, 226, 216,206], text='OTRO')
+olist.crear_bloque_vertical()
+can.drawString(olist.get_punto().ubix, olist.get_punto().ubiy, 'X')
+
+olist = Lista(choise=tipo_almacenamiento_choise, ubix=503, lubiy=[248, 237, 226, 216, 206, 193], text='CISTERNA',
+              otro=True, ubixotro=526, ubiyotro=196, otrotext='asdasdasd')
+olist.crear_bloque_vertical()
+can.drawString(olist.get_punto().ubix, olist.get_punto().ubiy, 'X')
+if olist.get_otro():
+    can = texto_separado(txt=olist.get_otro().txt, ubix=olist.get_otro().ubix, ubiy=olist.get_otro().ubiy, txtsize=7,
+                         isseparado=False, canv=can)
+
+can = texto_separado(txt='12', ubix=200, ubiy=194, txtsize=9,isseparado=False, canv=can)
+can = texto_separado(txt='12', ubix=280, ubiy=194, txtsize=9,isseparado=False, canv=can)
+can = texto_separado(txt='X', ubix=360, ubiy=194, txtsize=9,isseparado=False, canv=can)
+can = texto_separado(txt='X', ubix=380, ubiy=194, txtsize=9,isseparado=False, canv=can)
+#8
+can = texto_separado(txt='12', ubix=96, ubiy=162, txtsize=9,isseparado=False, canv=can)
+can = texto_separado(txt='X', ubix=125, ubiy=162, txtsize=9,isseparado=False, canv=can)
+can = texto_separado(txt='X', ubix=125, ubiy=151, txtsize=9,isseparado=False, canv=can)
+can = texto_separado(txt='X', ubix=125, ubiy=139, txtsize=9,isseparado=False, canv=can)
+can = texto_separado(txt='X', ubix=125, ubiy=128, txtsize=9,isseparado=False, canv=can)
+can = texto_separado(txt='X', ubix=125, ubiy=117, txtsize=9,isseparado=False, canv=can)
+
+can = texto_separado(txt='12', ubix=300, ubiy=162, txtsize=9,isseparado=False, canv=can)
+can = texto_separado(txt='X', ubix=330, ubiy=162, txtsize=9,isseparado=False, canv=can)
+can = texto_separado(txt='X ASDASD ASDASD ASD', ubix=395, ubiy=162, txtsize=9,isseparado=False, canv=can)
+
+can = texto_separado(txt='X', ubix=330, ubiy=151, txtsize=9,isseparado=False, canv=can)
+can = texto_separado(txt='X ASDASD ASDASD ASD', ubix=395, ubiy=151, txtsize=9,isseparado=False, canv=can)
+
+can = texto_separado(txt='X', ubix=330, ubiy=139, txtsize=9,isseparado=False, canv=can)
+can = texto_separado(txt='X ASDASD ASDASD ASD', ubix=395, ubiy=139, txtsize=9,isseparado=False, canv=can)
+
+can = texto_separado(txt='X', ubix=330, ubiy=128, txtsize=9,isseparado=False, canv=can)
+can = texto_separado(txt='X ASDASD ASDASD ASD', ubix=395, ubiy=128, txtsize=9,isseparado=False, canv=can)
+
+can = texto_separado(txt='X', ubix=330, ubiy=117, txtsize=9,isseparado=False, canv=can)
+can = texto_separado(txt='X ASDASD ASDASD ASD', ubix=395, ubiy=117, txtsize=9,isseparado=False, canv=can)
+# segunda hoja
+can.showPage()
+
 can.setFont("Helvetica", 5)
 can.setFillColor(blue)
 for i in range(0, 600, 10):
-    can.drawString(i, 455, str(i))
+    can.drawString(i, 275, str(i))
 
 for i in range(0, 840, 10):
     can.drawString(280, i, str(i))
 
-# segunda hoja
-can.showPage()
+
 can.setFillColor(red)
 can.setFont("Helvetica", 32)
 can.drawString(150, 150, "X")
