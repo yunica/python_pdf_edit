@@ -329,13 +329,27 @@ can = texto_separado(txt='X ASDASD ASDASD ASD', ubix=395, ubiy=128, txtsize=9,is
 
 can = texto_separado(txt='X', ubix=330, ubiy=117, txtsize=9,isseparado=False, canv=can)
 can = texto_separado(txt='X ASDASD ASDASD ASD', ubix=395, ubiy=117, txtsize=9,isseparado=False, canv=can)
+
+
+
 # segunda hoja
 can.showPage()
+olist = Lista(choise=tipo_almacenamiento_choise, ubix=503, lubiy=[248, 237, 226, 216, 206, 193], text='CISTERNA',
+              otro=True, ubixotro=526, ubiyotro=196, otrotext='asdasdasd')
+olist.crear_bloque_vertical()
+can.drawString(olist.get_punto().ubix, olist.get_punto().ubiy, 'X')
+if olist.get_otro():
+    can = texto_separado(txt=olist.get_otro().txt, ubix=olist.get_otro().ubix, ubiy=olist.get_otro().ubiy, txtsize=7,
+                         isseparado=False, canv=can)
+
+
+
+
 
 can.setFont("Helvetica", 5)
 can.setFillColor(blue)
 for i in range(0, 600, 10):
-    can.drawString(i, 275, str(i))
+    can.drawString(i, 770, str(i))
 
 for i in range(0, 840, 10):
     can.drawString(280, i, str(i))
@@ -344,13 +358,40 @@ for i in range(0, 840, 10):
 can.setFillColor(red)
 can.setFont("Helvetica", 32)
 can.drawString(150, 150, "X")
-can.showPage()
+
 
 # can.setFillColor(red)
 # can.setFont("Helvetica", 15)
 # can.drawString(167, 214, "X")
 
 can.save()
+
+
+
+
+# Tercera hoja
+packet2 = io.BytesIO()
+can2 = canvas.Canvas(packet2, pagesize=legal)
+# text
+can2.setFillColor(black)
+can2.setFont("Helvetica", 12)
+
+olist = Lista(choise=tipo_almacenamiento_choise, ubix=503, lubiy=[248, 237, 226, 216, 206, 193], text='CISTERNA',
+              otro=True, ubixotro=526, ubiyotro=196, otrotext='asdasdasd')
+olist.crear_bloque_vertical()
+can2.drawString(olist.get_punto().ubix, olist.get_punto().ubiy, 'X')
+
+if olist.get_otro():
+    can2 = texto_separado(txt=olist.get_otro().txt, ubix=olist.get_otro().ubix, ubiy=olist.get_otro().ubiy, txtsize=7,
+                         isseparado=False, canv=can2)
+
+can2.setFillColor(red)
+can2.setFont("Helvetica", 32)
+can2.drawString(150, 150, "X")
+can2.showPage()
+can2.save()
+
+
 
 # move to the beginning of the StringIO buffer
 packet.seek(0)
@@ -364,11 +405,22 @@ output = PdfFileWriter()
 page = existing_pdf.getPage(0)
 page.mergePage(new_pdf.getPage(0))
 output.addPage(page)
-# segunda pagina
 
+# segunda pagina
 page = existing_pdf.getPage(1)
 page.mergePage(new_pdf.getPage(1))
 output.addPage(page)
+
+#tercera hoja
+packet2.seek(0)
+new_pdf2 = PdfFileReader(packet2)
+existing_pdf2 = PdfFileReader(open("pdfblanco.pdf", "rb"))
+
+page2= existing_pdf2.getPage(0)
+page2.mergePage(new_pdf2.getPage(0))
+
+output.addPage(page2)
+
 
 # finally, write "output" to a real file
 outputStream = open("destinoa4.pdf", "wb")
