@@ -3,6 +3,8 @@ import io
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import legal
 from reportlab.lib.colors import black, red, blue
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle, TA_CENTER
+from reportlab.platypus import Paragraph
 
 resultado_entrevista_choise = ['COMPLETA', 'RECHAZADA', 'AUSENTE']
 tipo_usuario_choise = ['ACTIVA', 'FACTIBLE', 'POTENCIAL', 'CLANDESTINA', ]
@@ -545,6 +547,17 @@ can = texto_separado(txt='123 ASDASD', ubix=423, ubiy=245, txtsize=7, isseparado
 can = texto_separado(txt='456 ASDASD', ubix=495, ubiy=245, txtsize=7, isseparado=False, canv=can)
 # 17
 can = texto_separado(txt='123 ASDASD 123 123', ubix=430, ubiy=217, txtsize=7, isseparado=False, canv=can)
+# 19
+ptext = """Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
+        nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+        reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in 
+        culpa qui officia deserunt mollit anim id est laborum."""
+p = Paragraph(ptext, style=getSampleStyleSheet()["Normal"])
+p.wrapOn(can, 440 ,30)
+p.drawOn(can, 110, 140)
 
 # 19
 can = texto_separado(txt='123 ASDASD 123 123', ubix=430, ubiy=217, txtsize=7, isseparado=False, canv=can)
