@@ -12,13 +12,14 @@ can = canvas.Canvas(packet, pagesize=legal)
 can.setFillColor(black)
 can.setFont("Helvetica", 12)
 can.drawString(124, 109, "X")
+can.drawImage('iamgen.jpg', 10, 10,200,200)
+# open('iamgen.png')
 can.showPage()
 
 can.setFillColor(red)
 can.setFont("Helvetica", 32)
 can.drawString(150, 150, "X")
 can.showPage()
-
 
 # can.setFillColor(red)
 # can.setFont("Helvetica", 15)

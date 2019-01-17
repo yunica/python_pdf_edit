@@ -1,9 +1,9 @@
 from PyPDF2 import PdfFileWriter, PdfFileReader
 import io
 from reportlab.pdfgen import canvas
-from reportlab.lib.pagesizes import legal
-from reportlab.lib.colors import black, red, blue
-from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle, TA_CENTER
+from reportlab.lib.pagesizes import legal, letter, A4
+from reportlab.lib.colors import red, blue
+from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.platypus import Paragraph
 
 resultado_entrevista_choise = ['COMPLETA', 'RECHAZADA', 'AUSENTE']
@@ -445,11 +445,10 @@ olist.crear_bloque_vertical()
 if olist.get_punto():
     can.drawString(olist.get_punto().ubix, olist.get_punto().ubiy, 'X')
 if '502' == '6-150mm':
-    can = texto_separado(txt='6-150mm', ubix=200, ubiy=505, txtsize=7,isseparado=False, isred=True, canv=can)
+    can = texto_separado(txt='6-150mm', ubix=200, ubiy=505, txtsize=7, isseparado=False, isred=True, canv=can)
 if olist.get_otro():
     can = texto_separado(txt=olist.get_otro().txt, ubix=olist.get_otro().ubix, ubiy=olist.get_otro().ubiy, txtsize=7,
                          isseparado=False, isred=True, canv=can)
-
 
 olist = Lista(choise=marca_medidor_choise, lubix=[268, 268, 268, 268, 268, 320, 320, 320, 320, 320, 268],
               lubiy=[586, 573, 560, 548, 537, 586, 573, 560, 548, 537, 524], text='NINGUNO', otro=True, ubixotro=288,
@@ -461,7 +460,7 @@ if olist.get_otro():
     can = texto_separado(txt=olist.get_otro().txt, ubix=olist.get_otro().ubix, ubiy=olist.get_otro().ubiy, txtsize=7,
                          isseparado=False, isred=True, canv=can)
 
-olist = Lista(choise=estado_medidor_choise, ubix=390, lubiy=[586, 573, 560, 548, 537,525], text='OTRO',
+olist = Lista(choise=estado_medidor_choise, ubix=390, lubiy=[586, 573, 560, 548, 537, 525], text='OTRO',
               otro=True, ubixotro=415, ubiyotro=526, otrotext='asdasdasd')
 olist.crear_bloque_vertical()
 
@@ -472,7 +471,7 @@ if olist.get_otro():
     can = texto_separado(txt=olist.get_otro().txt, ubix=olist.get_otro().ubix, ubiy=olist.get_otro().ubiy, txtsize=7,
                          isseparado=False, isred=True, canv=can)
 
-olist = Lista(choise=ubicacion_caja_conex_choise, ubix=53, lubiy=[440,427,413,400,388,388], text='OTRO', otro=True,
+olist = Lista(choise=ubicacion_caja_conex_choise, ubix=53, lubiy=[440, 427, 413, 400, 388, 388], text='OTRO', otro=True,
               ubixotro=91, ubiyotro=389, otrotext='/ OTRO')
 olist.crear_bloque_vertical()
 
@@ -483,8 +482,7 @@ if olist.get_otro():
     can = texto_separado(txt=olist.get_otro().txt, ubix=olist.get_otro().ubix, ubiy=olist.get_otro().ubiy, txtsize=7,
                          isseparado=False, isred=True, canv=can)
 
-
-olist = Lista(choise=diametro_conex_desague_choise, ubix=145, lubiy=[440,426,413,400], text='OTRO',
+olist = Lista(choise=diametro_conex_desague_choise, ubix=145, lubiy=[440, 426, 413, 400], text='OTRO',
               otro=True, ubixotro=170, ubiyotro=403, otrotext='asdasdasd')
 olist.crear_bloque_vertical()
 
@@ -495,7 +493,7 @@ if olist.get_otro():
     can = texto_separado(txt=olist.get_otro().txt, ubix=olist.get_otro().ubix, ubiy=olist.get_otro().ubiy, txtsize=7,
                          isseparado=False, isred=True, canv=can)
 
-olist = Lista(choise=condicion_conex_desague_choise, ubix=236, lubiy=[440,426,413,400], text='OTRO',
+olist = Lista(choise=condicion_conex_desague_choise, ubix=236, lubiy=[440, 426, 413, 400], text='OTRO',
               otro=True, ubixotro=260, ubiyotro=403, otrotext='asdasdasd')
 olist.crear_bloque_vertical()
 
@@ -506,8 +504,7 @@ if olist.get_otro():
     can = texto_separado(txt=olist.get_otro().txt, ubix=olist.get_otro().ubix, ubiy=olist.get_otro().ubiy, txtsize=7,
                          isseparado=False, isred=True, canv=can)
 
-
-olist = Lista(choise=estado_tapa_caja_registro_choise, ubix=420, lubiy=[426,413,400], text='BUENO',
+olist = Lista(choise=estado_tapa_caja_registro_choise, ubix=420, lubiy=[426, 413, 400], text='BUENO',
               otro=True, ubixotro=443, ubiyotro=403, otrotext='asdasdasd')
 olist.crear_bloque_vertical()
 
@@ -518,8 +515,7 @@ if olist.get_otro():
     can = texto_separado(txt=olist.get_otro().txt, ubix=olist.get_otro().ubix, ubiy=olist.get_otro().ubiy, txtsize=7,
                          isseparado=False, isred=True, canv=can)
 
-
-olist = Lista(choise=material_tapa_desague_choise, ubix=503, lubiy=[440,426,413,389,400], text='OTRO',
+olist = Lista(choise=material_tapa_desague_choise, ubix=503, lubiy=[440, 426, 413, 389, 400], text='OTRO',
               otro=True, ubixotro=528, ubiyotro=403, otrotext='asdasdasd')
 olist.crear_bloque_vertical()
 
@@ -556,41 +552,24 @@ ptext = """Lorem ipsum dolor sit amet, consectetur adipisicing elit,
         pariatur. Excepteur sint occaecat cupidatat non proident, sunt in 
         culpa qui officia deserunt mollit anim id est laborum."""
 p = Paragraph(ptext, style=getSampleStyleSheet()["Normal"])
-p.wrapOn(can, 440 ,30)
+p.wrapOn(can, 440, 30)
 p.drawOn(can, 110, 140)
 
 # 19
 can = texto_separado(txt='123 ASDASD 123 123', ubix=430, ubiy=217, txtsize=7, isseparado=False, canv=can)
-#encuestador
+# encuestador
 can = texto_separado(txt='123 ASSD', ubix=75, ubiy=100, txtsize=7, isseparado=False, canv=can)
 can = texto_separado(txt='21/08/2018', ubix=130, ubiy=100, txtsize=7, isseparado=False, canv=can)
-#digitador
+# digitador
 can = texto_separado(txt='123 ASSD', ubix=220, ubiy=100, txtsize=7, isseparado=False, canv=can)
 can = texto_separado(txt='21/08/2018', ubix=280, ubiy=100, txtsize=7, isseparado=False, canv=can)
-#supervisor
+# supervisor
 can = texto_separado(txt='123 ASSD', ubix=360, ubiy=100, txtsize=7, isseparado=False, canv=can)
 can = texto_separado(txt='21/08/2018', ubix=420, ubiy=100, txtsize=7, isseparado=False, canv=can)
 
-
-"""
-
-# ubicacion_caja_conex_desague_choise =
-diametro_conex_desague_choise = ['4-100mm', '6-150mm', '8-150mm', 'OTRO']
-condicion_conex_desague_choise = ['ACTIVA', 'CORTADA', 'SIN CONEXION', 'OTRO']
-# material_conex_desague_choise
-estado_tapa_caja_registro_choise = ['BUENO', 'MAL ESTADO', 'OTRO']
-material_tapa_desague_choise = ['FIERRO GALVANIZADO', 'FIERRO FUNDIDO', 'CONCRETO', 'NO TIENE', 'OTRO']
-
-
-"""
-
-can.setFont("Helvetica", 5)
-can.setFillColor(blue)
-for i in range(0, 600, 10):
-    can.drawString(i, 50, str(i))
-
-for i in range(0, 840, 10):
-    can.drawString(280, i, str(i))
+# 20
+can = texto_separado(txt='x', ubix=506, ubiy=89, txtsize=14, isseparado=False, canv=can)
+can = texto_separado(txt='x', ubix=548, ubiy=89, txtsize=14, isseparado=False, canv=can)
 
 # can.setFillColor(red)
 # can.setFont("Helvetica", 15)
@@ -603,20 +582,16 @@ packet2 = io.BytesIO()
 can2 = canvas.Canvas(packet2, pagesize=legal)
 # text
 can2.setFillColor(blue)
-can2.setFont("Helvetica", 12)
+can2.setFont("Helvetica", 4)
+for i in range(0, 600, 10):
+    can2.drawString(i, 770, str(i))
 
-olist = Lista(choise=tipo_almacenamiento_choise, ubix=503, lubiy=[248, 237, 226, 216, 206, 193], text='CISTERNA',
-              otro=True, ubixotro=526, ubiyotro=196, otrotext='asdasdasd')
-olist.crear_bloque_vertical()
+for i in range(0, 840, 10):
+    can2.drawString(280, i, str(i))
+
 can2.drawString(olist.get_punto().ubix, olist.get_punto().ubiy, 'X')
 
-if olist.get_otro():
-    can2 = texto_separado(txt=olist.get_otro().txt, ubix=olist.get_otro().ubix, ubiy=olist.get_otro().ubiy, txtsize=7,
-                          isseparado=False, canv=can2)
 
-can2.setFillColor(red)
-can2.setFont("Helvetica", 32)
-can2.drawString(150, 150, "X")
 can2.showPage()
 can2.save()
 
