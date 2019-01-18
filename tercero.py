@@ -242,6 +242,44 @@ if grilla <= 40 and grilla >= 33:
     grilla_x = 260
 can = texto_separado(txt='x', txtsize=20, ubix=grilla_x, ubiy=list_grilla_y[grilla], canv=can)
 
+
+
+
+can.setFont("Helvetica", 5)
+for i in range(0, 1200, 10):
+    can.drawString(i, 860, str(i))
+    can.drawString(i, 660, str(i))
+    can.drawString(i, 460, str(i))
+    can.drawString(i, 360, str(i))
+    can.drawString(i, 360, str(i))
+    can.drawString(i, 180, str(i))
+    can.drawString(i, 100, str(i))
+
+for i in range(0, 1600, 10):
+    can.drawString(150, i, str(i))
+    can.drawString(700, i, str(i))
+    can.drawString(350, i, str(i))
+    can.drawString(450, i, str(i))
+    can.drawString(860, i, str(i))
+
+for i in range(0, 600, 30):
+    can.drawString(i, 770, str(i))
+    can.drawString(i, 220, str(i))
+
+#vista_panoramica1
+can.drawImage('iamgen.jpg', 140, 465,640,480)
+#vista_panoramica1
+can.drawImage('iamgen.jpg', 480, 227,227,170)
+
+
+
+
+
+
+
+
+
+
 #
 can = texto_separado(txt='17/01/2019', isseparado=False, txtsize=23, ubix=100, ubiy=166, canv=can)
 can = texto_separado(txt='wjfhrutb', isseparado=False, txtsize=23, ubix=300, ubiy=166, canv=can)
@@ -253,12 +291,6 @@ can = texto_separado(txt='Pepe Flores', isseparado=False, txtsize=23, ubix=820, 
 
 
 can.showPage()
-can.setFont("Helvetica", 5)
-for i in range(0, 1200, 10):
-    can.drawString(i, 850, str(i))
-
-for i in range(0, 1600, 10):
-    can.drawString(350, i, str(i))
 
 can.setFont("Helvetica", 20)
 # Numero de ficha
@@ -350,31 +382,226 @@ if tapa_var:
     can = texto_separado(txt='X', isseparado=False, ubix=168, ubiy=816, canv=can)
 else:
     can = texto_separado(txt='X', isseparado=False, ubix=213, ubiy=816, canv=can)
+seguridad_var = True
+if tapa_var:
+    can = texto_separado(txt='X', isseparado=False, ubix=344, ubiy=816, canv=can)
+else:
+    can = texto_separado(txt='X', isseparado=False, ubix=390, ubiy=816, canv=can)
 
+# centrico excentrico
+olist = Lista(choise=tapa_centrico_choice, ubiy=787, lubix=[154, 253], text='EXCENTRICO')
+olist.crear_bloque_horizontal()
+if olist.get_punto():
+    can.setFont("Helvetica", 20)
+    can.drawString(olist.get_punto().ubix, olist.get_punto().ubiy, 'X')
+# sellado hermetico
+sellado_hermetico = False
+if sellado_hermetico:
+    can = texto_separado(txt='X', isseparado=False, ubix=325, ubiy=770, canv=can)
+else:
+    can = texto_separado(txt='X', isseparado=False, ubix=370, ubiy=770, canv=can)
 
-olist = Lista(choise=fuste_mesa_estado_choice, ubix=850, lubiy=[400, 440, 430, 420, 410], text='BUENO', otro=True,
-              ubixotro=362, ubiyotro=960, otrotext='asdasdasd')
+can = texto_separado(txt='CENTRICO', isseparado=False, ubix=158, ubiy=760, canv=can)
+
+# estado
+olist = Lista(choise=estado_generico, lubix=[460, 460, 562, 560],
+              lubiy=[772, 752, 772, 772], text='REGULAR')
+olist.crear_bloque_especial()
+if olist.get_punto():
+    can.setFont("Helvetica", 20)
+    can.drawString(olist.get_punto().ubix, olist.get_punto().ubiy, 'X')
+
+# geometria
+olist = Lista(choise=tapa_geometria_choice, ubix=140, lubiy=[698, 675, 657], text='OTRO', otro=True,
+              ubixotro=190, ubiyotro=658, otrotext='asdasdasd')
 olist.crear_bloque_vertical()
 if olist.get_punto():
     can.setFont("Helvetica", 20)
     can.drawString(olist.get_punto().ubix, olist.get_punto().ubiy, 'X')
 if olist.get_otro():
-    can = texto_separado(txt=olist.get_otro().txt, ubix=olist.get_otro().ubix, ubiy=olist.get_otro().ubiy, txtsize=7,
+    can = texto_separado(txt=olist.otrotext, ubix=int(olist.ubixotro), ubiy=int(olist.ubiyotro), txtsize=7,
                          isseparado=False, isred=True, canv=can)
-# accesibilidad al buzon
+# medida
+can = texto_separado(txt='diametro', isseparado=False, txtsize=15, ubix=360, ubiy=698, canv=can)
+can = texto_separado(txt='espesor', isseparado=False, txtsize=15, ubix=360, ubiy=676, canv=can)
+# material
+olist = Lista(choise=material_tapa_choice, ubix=462, lubiy=[707, 689, 671, 653], text='OTRO', otro=True,
+              ubixotro=514, ubiyotro=658, otrotext='asdasdasd')
+olist.crear_bloque_vertical()
+if olist.get_punto():
+    can.setFont("Helvetica", 20)
+    can.drawString(olist.get_punto().ubix, olist.get_punto().ubiy, 'X')
+if olist.get_otro():
+    can = texto_separado(txt=olist.otrotext, ubix=int(olist.ubixotro), ubiy=int(olist.ubiyotro), txtsize=10,
+                         isseparado=False, isred=True, canv=can)
 
-
-# estado mesa
-variable_escalera = False
-if variable_escalera:
-    can = texto_separado(txt='X.', isseparado=False, ubix=570, ubiy=400, canv=can)
+anillo = True
+if anillo:
+    can = texto_separado(txt='X', isseparado=False, ubix=225, ubiy=610, canv=can)
 else:
-    can = texto_separado(txt='X', isseparado=False, ubix=630, ubiy=400, canv=can)
+    can = texto_separado(txt='X', isseparado=False, ubix=285, ubiy=610, canv=can)
 
-# choise=[], ubix=0, ubiy=0, separacion=0, lubix=[], lubiy=[], text=None, otro=False,
-# ubixotro=0, ubiyotro=0, otrotext=None
-#                   TERCERA hoja
+# anillo material
+olist = Lista(choise=material_anillo_choice, ubix=140, lubiy=[570, 550, 530], text='OTRO', otro=True,
+              ubixotro=193, ubiyotro=532, otrotext='asdasdasd')
+olist.crear_bloque_vertical()
+if olist.get_punto():
+    can.setFont("Helvetica", 20)
+    can.drawString(olist.get_punto().ubix, olist.get_punto().ubiy, 'X')
+if olist.get_otro():
+    can = texto_separado(txt=olist.otrotext, ubix=int(olist.ubixotro), ubiy=int(olist.ubiyotro), txtsize=10,
+                         isseparado=False, isred=True, canv=can)
+
+# material
+olist = Lista(choise=estado_generico, ubix=300, lubiy=[571, 550, 530], text='MALO')
+olist.crear_bloque_vertical()
+if olist.get_punto():
+    can.setFont("Helvetica", 20)
+    can.drawString(olist.get_punto().ubix, olist.get_punto().ubiy, 'X')
+# respiradero
+respiradero = False
+if respiradero:
+    can = texto_separado(txt='X', isseparado=False, ubix=555, ubiy=610, canv=can)
+else:
+    can = texto_separado(txt='X', isseparado=False, ubix=609, ubiy=610, canv=can)
+# respiradero pestaña
+respiradero_pestania = False
+if respiradero_pestania:
+    can = texto_separado(txt='X', isseparado=False, ubix=489, ubiy=568, canv=can)
+else:
+    can = texto_separado(txt='X', isseparado=False, ubix=489, ubiy=546, canv=can)
+# respiradero pasador
+respiradero_pasador = False
+if respiradero_pasador:
+    can = texto_separado(txt='X', isseparado=False, ubix=570, ubiy=568, canv=can)
+else:
+    can = texto_separado(txt='X', isseparado=False, ubix=570, ubiy=546, canv=can)
+
+# techo
+olist = Lista(choise=geometria_techo_choice, ubix=706, lubiy=[774, 753], text='CUADRADA')
+olist.crear_bloque_vertical()
+if olist.get_punto():
+    can.setFont("Helvetica", 20)
+    can.drawString(olist.get_punto().ubix, olist.get_punto().ubiy, 'X')
+# estado
+olist = Lista(choise=estado_generico, ubix=864, lubiy=[772, 753, 732], text='MALO')
+olist.crear_bloque_vertical()
+if olist.get_punto():
+    can.setFont("Helvetica", 20)
+    can.drawString(olist.get_punto().ubix, olist.get_punto().ubiy, 'X')
+# techi_anillo
+techo_anillo = True
+if techo_anillo:
+    can = texto_separado(txt='X', isseparado=False, ubix=835, ubiy=675, canv=can)
+else:
+    can = texto_separado(txt='X', isseparado=False, ubix=890, ubiy=675, canv=can)
+
+# techo anillo material
+olist = Lista(choise=techo_anillo_material_choice, ubix=715, lubiy=[630, 605], text='OTRO', otro=True,
+              ubixotro=770, ubiyotro=604, otrotext='asdasdasd')
+olist.crear_bloque_vertical()
+if olist.get_punto():
+    can.setFont("Helvetica", 20)
+    can.drawString(olist.get_punto().ubix, olist.get_punto().ubiy, 'X')
+if olist.get_otro():
+    can = texto_separado(txt=olist.otrotext, ubix=int(olist.ubixotro), ubiy=int(olist.ubiyotro), txtsize=10,
+                         isseparado=False, isred=True, canv=can)
+# estado
+olist = Lista(choise=estado_generico, ubix=870, lubiy=[625, 605, 585], text='BUENO')
+olist.crear_bloque_vertical()
+if olist.get_punto():
+    can.setFont("Helvetica", 20)
+    can.drawString(olist.get_punto().ubix, olist.get_punto().ubiy, 'X')
+
+# fuste geometria
+olist = Lista(choise=fuste_geometria_choice, ubix=135, lubiy=[440, 420, 399], text='CONICO')
+olist.crear_bloque_vertical()
+if olist.get_punto():
+    can.setFont("Helvetica", 20)
+    can.drawString(olist.get_punto().ubix, olist.get_punto().ubiy, 'X')
+
+olist = Lista(choise=estado_generico, ubix=275, lubiy=[440, 420, 399], text='MALO')
+olist.crear_bloque_vertical()
+if olist.get_punto():
+    can.setFont("Helvetica", 20)
+    can.drawString(olist.get_punto().ubix, olist.get_punto().ubiy, 'X')
+
+# material
+olist = Lista(choise=fuste_material_choice, ubix=410, lubiy=[440, 420, 399], text='OTRO', otro=True,
+              ubixotro=460, ubiyotro=400, otrotext='asdasdasd')
+olist.crear_bloque_vertical()
+if olist.get_punto():
+    can.setFont("Helvetica", 20)
+    can.drawString(olist.get_punto().ubix, olist.get_punto().ubiy, 'X')
+if olist.get_otro():
+    can = texto_separado(txt=olist.otrotext, ubix=int(olist.ubixotro), ubiy=int(olist.ubiyotro), txtsize=10,
+                         isseparado=False, isred=True, canv=can)
+
+escalera = False
+if escalera:
+    can = texto_separado(txt='X', isseparado=False, ubix=580, ubiy=438, canv=can)
+else:
+    can = texto_separado(txt='X', isseparado=False, ubix=640, ubiy=438, canv=can)
+
+can = texto_separado(txt='123456', isseparado=False, ubix=580, ubiy=385, canv=can)
+
+# estado
+olist = Lista(choise=estado_generico, ubix=695, lubiy=[423, 402, 382], text='BUENO')
+olist.crear_bloque_vertical()
+if olist.get_punto():
+    can.setFont("Helvetica", 20)
+    can.drawString(olist.get_punto().ubix, olist.get_punto().ubiy, 'X')
+# mesa-estado-mesa
+olist = Lista(choise=fuste_mesa_estado_choice, ubix=855, lubiy=[443, 425, 408, 392, 372], text='OTRO', otro=True,
+              ubixotro=860, ubiyotro=355, otrotext='asdasdasd')
+olist.crear_bloque_vertical()
+if olist.get_punto():
+    can.setFont("Helvetica", 20)
+    can.drawString(olist.get_punto().ubix, olist.get_punto().ubiy, 'X')
+if olist.get_otro():
+    can = texto_separado(txt=olist.otrotext, ubix=int(olist.ubixotro), ubiy=int(olist.ubiyotro), txtsize=10,
+                         isseparado=False, isred=True, canv=can)
+can = texto_separado(txt='123456789123', txtsize=19, isseparado=False, ubix=825, ubiy=280, canv=can)
+can = texto_separado(txt='123456789123', txtsize=19, isseparado=False, ubix=825, ubiy=233, canv=can)
+desface_techo = True
+if desface_techo:
+    can = texto_separado(txt='X', isseparado=False, ubix=306, ubiy=295, canv=can)
+else:
+    can = texto_separado(txt='X', isseparado=False, ubix=306, ubiy=270, canv=can)
+#
+desface_tapa = False
+if desface_tapa:
+    can = texto_separado(txt='X', isseparado=False, ubix=465, ubiy=294, canv=can)
+else:
+    can = texto_separado(txt='X', isseparado=False, ubix=465, ubiy=269, canv=can)
+#
+desface_tapa = True
+if desface_tapa:
+    can = texto_separado(txt='X', isseparado=False, ubix=625, ubiy=294, canv=can)
+else:
+    can = texto_separado(txt='X', isseparado=False, ubix=625, ubiy=269, canv=can)
+
+can = texto_separado(txt='17/01/2019', isseparado=False, txtsize=23, ubix=100, ubiy=168, canv=can)
+can = texto_separado(txt='wjfhrutb', isseparado=False, txtsize=23, ubix=300, ubiy=168, canv=can)
+can = texto_separado(txt='sftgre', isseparado=False, txtsize=23, ubix=475, ubiy=168, canv=can)
+can = texto_separado(txt='Jose Flores', isseparado=False, txtsize=23, ubix=645, ubiy=168, canv=can)
+can = texto_separado(txt='Pepe Flores', isseparado=False, txtsize=23, ubix=820, ubiy=168, canv=can)
+
 can.showPage()
+
+
+ptext = """Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
+        nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+        reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in 
+        culpa qui officia deserunt mollit anim id est laborum."""
+p = Paragraph(ptext, style=getSampleStyleSheet()["Normal"])
+p.wrapOn(can, 800, 20)
+p.drawOn(can, 110, 225)
+
+
 
 for i in range(0, 600, 30):
     can.drawString(i, 770, str(i))
@@ -385,12 +612,39 @@ for i in range(0, 840, 20):
 #                   CUARTAa hoja
 can.showPage()
 
-for i in range(0, 600, 30):
-    can.drawString(i, 770, str(i))
-    can.drawString(i, 220, str(i))
+can.setFont("Helvetica", 20)
+# Numero de ficha
+can = texto_separado(txt='C12-0000162', isseparado=False, ubix=840, ubiy=1342, canv=can)
+can = texto_separado(txt='tt-0000162', isseparado=False, ubix=840, ubiy=1294, canv=can)
 
-for i in range(0, 840, 20):
-    can.drawString(280, i, str(i))
+# Localizacion
+can = texto_separado(txt='Ayac', isseparado=False, ubix=107, ubiy=1212, canv=can)
+can = texto_separado(txt='001', isseparado=False, ubix=173, ubiy=1212, canv=can)
+can = texto_separado(txt='001', isseparado=False, ubix=233, ubiy=1212, canv=can)
+can = texto_separado(txt='001', isseparado=False, ubix=293, ubiy=1212, canv=can)
+can = texto_separado(txt='sdf', isseparado=False, ubix=390, ubiy=1212, canv=can)
+can = texto_separado(txt='Av.Los incas ...', isseparado=False, ubix=465, ubiy=1212, canv=can)
+
+
+can = texto_separado(txt='17/01/2019', isseparado=False, txtsize=23, ubix=100, ubiy=168, canv=can)
+can = texto_separado(txt='wjfhrutb', isseparado=False, txtsize=23, ubix=300, ubiy=168, canv=can)
+can = texto_separado(txt='sftgre', isseparado=False, txtsize=23, ubix=475, ubiy=168, canv=can)
+can = texto_separado(txt='Jose Flores', isseparado=False, txtsize=23, ubix=645, ubiy=168, canv=can)
+can = texto_separado(txt='Pepe Flores', isseparado=False, txtsize=23, ubix=820, ubiy=168, canv=can)
+
+# imagenes
+#vista_panoramica1
+can.drawImage('iamgen.jpg', 110, 810,400,300)
+#vista_panoramica1
+can.drawImage('iamgen.jpg', 548, 810,400,300)
+#fotografia_interna1
+can.drawImage('iamgen.jpg', 110, 365,400,300)
+#fotografia_interna2
+can.drawImage('iamgen.jpg', 548, 365,400,300)
+
+
+
+
 
 """
 
