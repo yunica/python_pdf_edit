@@ -57,7 +57,7 @@ def ficha_num(txt='123456', canv=None):
     return canv
 
 
-def texto_separado(txt=None, isred=False, isseparado=True, txtsize=12, ubix=0, ubiy=0,
+def texto_separado(txt=None, isred=False, isseparado=True, txtsize=18, ubix=0, ubiy=0,
                    canv=None):
     if txt:
         canv.setFontSize(txtsize)
@@ -170,25 +170,209 @@ can = canvas.Canvas(packet, pagesize=legal)
 
 # text
 can.setFillColor(blue)
-can.setFont("Helvetica", 12)
-#                   PRIMERA hoja
-for i in range(0, 600, 30):
-    can.drawString(i, 770, str(i))
-    can.drawString(i, 220, str(i))
+can.setFont("Helvetica", 20)
 
-for i in range(0, 840, 20):
-    can.drawString(280, i, str(i))
+#                   PRIMERA hoja
+
+# desde aqui inicio
+# numero ficha
+can = texto_separado(txt='C12-0000162', isseparado=False, txtsize=23, ubix=830, ubiy=1325, canv=can)
+can = texto_separado(txt='tt-0000162', isseparado=False, txtsize=23, ubix=830, ubiy=1259, canv=can)
+can = texto_separado(txt='rr-4869', isseparado=False, txtsize=23, ubix=830, ubiy=1190, canv=can)
+can = texto_separado(txt='aa-785', isseparado=False, txtsize=23, ubix=830, ubiy=1149, canv=can)
+can = texto_separado(txt='bb-123', isseparado=False, txtsize=23, ubix=830, ubiy=1109, canv=can)
+can = texto_separado(txt='cc-123', isseparado=False, txtsize=23, ubix=830, ubiy=1067, canv=can)
+# Localizacion
+can = texto_separado(txt='05', isseparado=False, txtsize=23, ubix=103, ubiy=1219, canv=can)
+can = texto_separado(txt='001', isseparado=False, txtsize=23, ubix=173, ubiy=1219, canv=can)
+can = texto_separado(txt='001', isseparado=False, txtsize=23, ubix=233, ubiy=1219, canv=can)
+can = texto_separado(txt='001', isseparado=False, txtsize=23, ubix=293, ubiy=1219, canv=can)
+can = texto_separado(txt='sdf', isseparado=False, txtsize=23, ubix=390, ubiy=1219, canv=can)
+can = texto_separado(txt='Av.Los incas con numero # 170', isseparado=False, txtsize=19, ubix=465,
+                     ubiy=1219, canv=can)
+# cotas del esquinero
+can = texto_separado(txt='012 ', isseparado=False, ubix=113, ubiy=1149, canv=can)
+can = texto_separado(txt='013', isseparado=False, ubix=113, ubiy=1132, canv=can)
+can = texto_separado(txt='014', isseparado=False, ubix=113, ubiy=1115, canv=can)
+can = texto_separado(txt='015', isseparado=False, ubix=113, ubiy=1098, canv=can)
+can = texto_separado(txt='016', isseparado=False, ubix=113, ubiy=1080, canv=can)
+can = texto_separado(txt='012 ', isseparado=False, ubix=220, ubiy=1149, canv=can)
+can = texto_separado(txt='013', isseparado=False, ubix=210, ubiy=1132, canv=can)
+can = texto_separado(txt='014', isseparado=False, ubix=210, ubiy=1115, canv=can)
+can = texto_separado(txt='015', isseparado=False, ubix=210, ubiy=1098, canv=can)
+can = texto_separado(txt='016', isseparado=False, ubix=210, ubiy=1080, canv=can)
+can = texto_separado(txt='012 ', isseparado=False, ubix=340, ubiy=1149, canv=can)
+can = texto_separado(txt='013', isseparado=False, ubix=330, ubiy=1132, canv=can)
+can = texto_separado(txt='014', isseparado=False, ubix=330, ubiy=1115, canv=can)
+can = texto_separado(txt='015', isseparado=False, ubix=330, ubiy=1098, canv=can)
+can = texto_separado(txt='016', isseparado=False, ubix=330, ubiy=1080, canv=can)
+can = texto_separado(txt='112 ', isseparado=False, ubix=470, ubiy=1150, canv=can)
+can = texto_separado(txt='013', isseparado=False, ubix=470, ubiy=1132, canv=can)
+can = texto_separado(txt='014', isseparado=False, ubix=470, ubiy=1115, canv=can)
+can = texto_separado(txt='015', isseparado=False, ubix=470, ubiy=1098, canv=can)
+can = texto_separado(txt='016', isseparado=False, ubix=470, ubiy=1080, canv=can)
+can = texto_separado(txt='212 ', isseparado=False, ubix=600, ubiy=1149, canv=can)
+can = texto_separado(txt='013', isseparado=False, ubix=600, ubiy=1132, canv=can)
+can = texto_separado(txt='014', isseparado=False, ubix=600, ubiy=1115, canv=can)
+can = texto_separado(txt='015', isseparado=False, ubix=600, ubiy=1098, canv=can)
+can = texto_separado(txt='016', isseparado=False, ubix=600, ubiy=1080, canv=can)
+can = texto_separado(txt='312 ', isseparado=False, ubix=740, ubiy=1149, canv=can)
+can = texto_separado(txt='13', isseparado=False, ubix=740, ubiy=1132, canv=can)
+can = texto_separado(txt='014', isseparado=False, ubix=740, ubiy=1115, canv=can)
+can = texto_separado(txt='015', isseparado=False, ubix=740, ubiy=1098, canv=can)
+can = texto_separado(txt='016', isseparado=False, ubix=740, ubiy=1080, canv=can)
+
+# grilla ubicacion
+grilla = 20
+grilla_x = None
+list_grilla_y = [0, 385, 370, 350, 335, 315, 300, 282, 265,
+                 265, 282, 300, 315, 335, 350, 370, 385,
+                 385, 370, 350, 335, 315, 300, 282, 265,
+                 265, 282, 300, 315, 335, 350, 370, 385,
+                 385, 370, 350, 335, 315, 300, 282, 265, ]
+if grilla <= 8 and grilla >= 1:
+    grilla_x = 162
+if grilla <= 16 and grilla >= 9:
+    grilla_x = 183
+if grilla <= 24 and grilla >= 17:
+    grilla_x = 212
+if grilla <= 32 and grilla >= 25:
+    grilla_x = 235
+if grilla <= 40 and grilla >= 33:
+    grilla_x = 260
+can = texto_separado(txt='x', txtsize=20, ubix=grilla_x, ubiy=list_grilla_y[grilla], canv=can)
+
+#
+can = texto_separado(txt='17/01/2019', isseparado=False, txtsize=23, ubix=100, ubiy=166, canv=can)
+can = texto_separado(txt='wjfhrutb', isseparado=False, txtsize=23, ubix=300, ubiy=166, canv=can)
+can = texto_separado(txt='sftgre', isseparado=False, txtsize=23, ubix=475, ubiy=166, canv=can)
+can = texto_separado(txt='Jose Flores', isseparado=False, txtsize=23, ubix=645, ubiy=166, canv=can)
+can = texto_separado(txt='Pepe Flores', isseparado=False, txtsize=23, ubix=820, ubiy=166, canv=can)
 
 #                   SEGUNDA hoja
+
+
 can.showPage()
+can.setFont("Helvetica", 5)
+for i in range(0, 1200, 10):
+    can.drawString(i, 850, str(i))
 
-for i in range(0, 600, 30):
-    can.drawString(i, 770, str(i))
-    can.drawString(i, 220, str(i))
+for i in range(0, 1600, 10):
+    can.drawString(350, i, str(i))
 
-for i in range(0, 840, 20):
-    can.drawString(280, i, str(i))
+can.setFont("Helvetica", 20)
+# Numero de ficha
+can = texto_separado(txt='C12-0000162', isseparado=False, ubix=840, ubiy=1342, canv=can)
+can = texto_separado(txt='tt-0000162', isseparado=False, ubix=840, ubiy=1294, canv=can)
 
+completa = False
+if completa:
+    can = texto_separado(txt='XXX', isseparado=False, ubix=840, ubiy=1242, canv=can)
+else:
+    can = texto_separado(txt='XXX', isseparado=False, ubix=910, ubiy=1242, canv=can)
+
+# Localizacion
+can = texto_separado(txt='Ayac', isseparado=False, ubix=107, ubiy=1201, canv=can)
+can = texto_separado(txt='001', isseparado=False, ubix=173, ubiy=1201, canv=can)
+can = texto_separado(txt='001', isseparado=False, ubix=233, ubiy=1201, canv=can)
+can = texto_separado(txt='001', isseparado=False, ubix=293, ubiy=1201, canv=can)
+can = texto_separado(txt='sdf', isseparado=False, ubix=390, ubiy=1201, canv=can)
+can = texto_separado(txt='y-997', isseparado=False, ubix=465, ubiy=1201, canv=can)
+can = texto_separado(txt='Av.Los incas ...', isseparado=False, ubix=603, ubiy=1201, canv=can)
+
+# ubicado en
+olist = Lista(choise=ubicado_choices, ubix=120, lubiy=[1118, 1099, 1078, 1060], text='OTRO', otro=True,
+              ubixotro=170, ubiyotro=1060, otrotext='asdasdasd')
+olist.crear_bloque_vertical()
+if olist.get_punto():
+    can.setFont("Helvetica", 20)
+    can.drawString(olist.get_punto().ubix, olist.get_punto().ubiy, 'X')
+if olist.get_otro():
+    can = texto_separado(txt=olist.get_otro().txt, ubix=olist.get_otro().ubix, ubiy=olist.get_otro().ubiy, txtsize=7,
+                         isseparado=False, isred=True, canv=can)
+# accesibilidad al buzon
+variable_accesibilidad = True
+if variable_accesibilidad:
+    can = texto_separado(txt='X', isseparado=False, ubix=311, ubiy=1119, canv=can)
+else:
+    can = texto_separado(txt='X', isseparado=False, ubix=311, ubiy=1099, canv=can)
+    # falta especifique
+olist = Lista(choise=accesibilidad_tipo_choice, ubix=372, lubiy=[1080, 1060, 1040, 1020, 1000], text='OTRO', otro=True,
+              ubixotro=426, ubiyotro=1003, otrotext='asdasdasd')
+olist.crear_bloque_vertical()
+if olist.get_punto():
+    can.setFont("Helvetica", 20)
+    can.drawString(olist.get_punto().ubix, olist.get_punto().ubiy, 'X')
+if olist.get_otro():
+    can = texto_separado(txt=olist.get_otro().txt, ubix=olist.get_otro().ubix, ubiy=olist.get_otro().ubiy, txtsize=7,
+                         isseparado=False, isred=True, canv=can)
+
+# corrdenadas
+can = texto_separado(txt='CORRDENADA X.', isseparado=False, ubix=530, ubiy=1090, canv=can)
+can = texto_separado(txt='CORRDENADA y .', isseparado=False, ubix=530, ubiy=1036, canv=can)
+can = texto_separado(txt='cota tapa .', isseparado=False, ubix=805, ubiy=1090, canv=can)
+can = texto_separado(txt='cota fondo .', isseparado=False, ubix=805, ubiy=1036, canv=can)
+
+# datos fisicos
+# tipo buzon
+olist = Lista(choise=tipo_buzon_choice, lubix=[120, 120, 120, 288, 288, 288, 453],
+              lubiy=[903, 882, 860, 903, 882, 860, 903], text='OTRO', otro=True,
+              ubixotro=505, ubiyotro=907, otrotext='asdasdasd')
+olist.crear_bloque_especial()
+if olist.get_punto():
+    can.setFont("Helvetica", 20)
+    can.drawString(olist.get_punto().ubix, olist.get_punto().ubiy, 'X')
+if olist.get_otro():
+    can = texto_separado(txt=olist.get_otro().txt, ubix=olist.get_otro().ubix, ubiy=olist.get_otro().ubiy, txtsize=7,
+                         isseparado=False, isred=True, canv=can)
+# montaje buzon
+olist = Lista(choise=montaje_buzon_choice, ubix=635, lubiy=[903, 882, 861], text='EMISOR', otro=True,
+              ubixotro=700, ubiyotro=866, otrotext='asdasdasd')
+olist.crear_bloque_vertical()
+if olist.get_punto():
+    can.setFont("Helvetica", 20)
+    can.drawString(olist.get_punto().ubix, olist.get_punto().ubiy, 'X')
+if olist.text == 'EMISOR':
+    can = texto_separado(txt=olist.otrotext, ubix=int(olist.ubixotro), ubiy=int(olist.ubiyotro), txtsize=7,
+                         isseparado=False, isred=True, canv=can)
+montaje_sabuzon_choice = ['PRIMARIO', 'SECUNDARIO', 'EMISOR', ]
+
+# buzon de arranque
+buzonarranque = False
+if buzonarranque:
+    can = texto_separado(txt='X', isseparado=False, ubix=905, ubiy=890, canv=can)
+else:
+    can = texto_separado(txt='X', isseparado=False, ubix=905, ubiy=870, canv=can)
+
+# tapa
+tapa_var = True
+if tapa_var:
+    can = texto_separado(txt='X', isseparado=False, ubix=168, ubiy=816, canv=can)
+else:
+    can = texto_separado(txt='X', isseparado=False, ubix=213, ubiy=816, canv=can)
+
+
+olist = Lista(choise=fuste_mesa_estado_choice, ubix=850, lubiy=[400, 440, 430, 420, 410], text='BUENO', otro=True,
+              ubixotro=362, ubiyotro=960, otrotext='asdasdasd')
+olist.crear_bloque_vertical()
+if olist.get_punto():
+    can.setFont("Helvetica", 20)
+    can.drawString(olist.get_punto().ubix, olist.get_punto().ubiy, 'X')
+if olist.get_otro():
+    can = texto_separado(txt=olist.get_otro().txt, ubix=olist.get_otro().ubix, ubiy=olist.get_otro().ubiy, txtsize=7,
+                         isseparado=False, isred=True, canv=can)
+# accesibilidad al buzon
+
+
+# estado mesa
+variable_escalera = False
+if variable_escalera:
+    can = texto_separado(txt='X.', isseparado=False, ubix=570, ubiy=400, canv=can)
+else:
+    can = texto_separado(txt='X', isseparado=False, ubix=630, ubiy=400, canv=can)
+
+# choise=[], ubix=0, ubiy=0, separacion=0, lubix=[], lubiy=[], text=None, otro=False,
+# ubixotro=0, ubiyotro=0, otrotext=None
 #                   TERCERA hoja
 can.showPage()
 
@@ -219,7 +403,7 @@ packet.seek(0)
 new_pdf = PdfFileReader(packet)
 
 # read your existing PDF
-existing_pdf = PdfFileReader(open("ficha.pdf", "rb"))
+existing_pdf = PdfFileReader(open("fichav2.pdf", "rb"))
 output = PdfFileWriter()
 
 # add the "watermark" (which is the new pdf) on the existing page
@@ -243,6 +427,6 @@ page.mergePage(new_pdf.getPage(3))
 output.addPage(page)
 
 # finally, write "output" to a real file
-outputStream = open("destinoa4.pdf", "wb")
+outputStream = open("destinoa4v2.pdf", "wb")
 output.write(outputStream)
 outputStream.close()
