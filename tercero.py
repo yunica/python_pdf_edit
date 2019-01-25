@@ -242,42 +242,14 @@ if grilla <= 40 and grilla >= 33:
     grilla_x = 260
 can = texto_separado(txt='x', txtsize=20, ubix=grilla_x, ubiy=list_grilla_y[grilla], canv=can)
 
-
-
-
-can.setFont("Helvetica", 5)
-for i in range(0, 1200, 10):
-    can.drawString(i, 860, str(i))
-    can.drawString(i, 660, str(i))
-    can.drawString(i, 460, str(i))
-    can.drawString(i, 360, str(i))
-    can.drawString(i, 360, str(i))
-    can.drawString(i, 180, str(i))
-    can.drawString(i, 100, str(i))
-
-for i in range(0, 1600, 10):
-    can.drawString(150, i, str(i))
-    can.drawString(700, i, str(i))
-    can.drawString(350, i, str(i))
-    can.drawString(450, i, str(i))
-    can.drawString(860, i, str(i))
-
-for i in range(0, 600, 30):
-    can.drawString(i, 770, str(i))
-    can.drawString(i, 220, str(i))
-
-#vista_panoramica1
-can.drawImage('iamgen.jpg', 140, 465,640,480)
-#vista_panoramica1
-can.drawImage('iamgen.jpg', 480, 227,227,170)
-
-
-
-
-
-
-
-
+#
+# #vista_panoramica1
+# can.drawImage('iamgen.jpg', 140, 465,640,480)
+# #vista_panoramica1
+# can.drawImage('iamgen.jpg', 480, 227,227,170)
+#
+#
+#
 
 
 #
@@ -586,9 +558,131 @@ can = texto_separado(txt='wjfhrutb', isseparado=False, txtsize=23, ubix=300, ubi
 can = texto_separado(txt='sftgre', isseparado=False, txtsize=23, ubix=475, ubiy=168, canv=can)
 can = texto_separado(txt='Jose Flores', isseparado=False, txtsize=23, ubix=645, ubiy=168, canv=can)
 can = texto_separado(txt='Pepe Flores', isseparado=False, txtsize=23, ubix=820, ubiy=168, canv=can)
+# tercera pagina
 
 can.showPage()
+can.setFont("Helvetica", 5)
+for i in range(0, 1200, 10):
+    can.drawString(i, 1230, str(i))
+    can.drawString(i, 860, str(i))
+    can.drawString(i, 660, str(i))
+    can.drawString(i, 460, str(i))
+    can.drawString(i, 360, str(i))
+    can.drawString(i, 360, str(i))
+    can.drawString(i, 180, str(i))
+    can.drawString(i, 100, str(i))
 
+for i in range(0, 1600, 10):
+    can.drawString(150, i, str(i))
+    can.drawString(700, i, str(i))
+    can.drawString(350, i, str(i))
+    can.drawString(450, i, str(i))
+    can.drawString(860, i, str(i))
+
+for i in range(0, 600, 30):
+    can.drawString(i, 770, str(i))
+    can.drawString(i, 220, str(i))
+can.setFont("Helvetica", 20)
+# Numero de ficha
+can = texto_separado(txt='C12-0000162', isseparado=False, ubix=840, ubiy=1342, canv=can)
+can = texto_separado(txt='tt-0000162', isseparado=False, ubix=840, ubiy=1294, canv=can)
+list_estado = 'FUNCIONANDO,COLMATADO (ATORADO),SEDIMENTADO,CON ESCOMBROS/BASURA'.split(',')
+if list_estado:
+    for i in list_estado:
+        olist = Lista(choise=estado_buzon_choice, lubix=[135, 135, 288, 288, 440],
+                      lubiy=[1175, 1148, 1175, 1148, 1175, ], text=i, otro=True, ubixotro=490, ubiyotro=1178,
+                      otrotext='asdasdasd')
+        olist.crear_bloque_especial()
+        if olist.get_punto():
+            can.setFont("Helvetica", 20)
+            can.drawString(olist.get_punto().ubix, olist.get_punto().ubiy, 'X')
+        if olist.get_otro():
+            can = texto_separado(txt=olist.otrotext, ubix=int(olist.ubixotro), ubiy=int(olist.ubiyotro),
+                                 txtsize=10, isseparado=False, isred=True, canv=can)
+
+olist = Lista(choise=escala_olores_choices, ubix=606, lubiy=[1189, 1160, 1132], text='BAJO')
+olist.crear_bloque_vertical()
+if olist.get_punto():
+    can.setFont("Helvetica", 20)
+    can.drawString(olist.get_punto().ubix, olist.get_punto().ubiy, 'X')
+
+texto_separado(txt='X', ubix=885, ubiy=1212, txtsize=20, isseparado=False, canv=can)
+texto_separado(txt='X', ubix=938, ubiy=1211, txtsize=20, isseparado=False, canv=can)
+texto_separado(txt='21', ubix=885, ubiy=1185, txtsize=14, isseparado=False, canv=can)
+# diametro
+texto_separado(txt='diametro1', ubix=810, ubiy=1143, txtsize=14, isseparado=False, canv=can)
+texto_separado(txt='material1', ubix=810, ubiy=1119, txtsize=14, isseparado=False, canv=can)
+
+texto_separado(txt='1', ubix=810, ubiy=1094, txtsize=20, isseparado=False, canv=can)
+texto_separado(txt='2', ubix=870, ubiy=1094, txtsize=20, isseparado=False, canv=can)
+
+texto_separado(txt='diametro12', ubix=810, ubiy=1057, txtsize=14, isseparado=False, canv=can)
+texto_separado(txt='material12', ubix=810, ubiy=1033, txtsize=14, isseparado=False, canv=can)
+
+texto_separado(txt='3', ubix=810, ubiy=1010, txtsize=20, isseparado=False, canv=can)
+texto_separado(txt='4', ubix=870, ubiy=1010, txtsize=20, isseparado=False, canv=can)
+#
+olist = Lista(choise=llegada_choice, ubix=135, lubiy=[1068, 1040], text='GRAVEDAD')
+olist.crear_bloque_vertical()
+if olist.get_punto():
+    can.setFont("Helvetica", 20)
+    can.drawString(olist.get_punto().ubix, olist.get_punto().ubiy, 'X')
+
+olist = Lista(choise=cantidad_sedimento_choice, ubix=322, lubiy=[1075, 1054, 1034], text='POCA O NULA CANTIDAD DE SEDIMENTO')
+olist.crear_bloque_vertical()
+if olist.get_punto():
+    can.setFont("Helvetica", 20)
+    can.drawString(olist.get_punto().ubix, olist.get_punto().ubiy, 'X')
+
+can = texto_separado(txt='sftgre', isseparado=False, txtsize=25, ubix=530, ubiy=920, canv=can)
+
+can = texto_separado(txt='sftgre', isseparado=False, ubix=220, txtsize=25, ubiy=865, canv=can)
+can = texto_separado(txt='sftgre', isseparado=False, ubix=380, txtsize=25, ubiy=865, canv=can)
+can = texto_separado(txt='sftgre', isseparado=False, ubix=530, txtsize=25, ubiy=865, canv=can)
+can = texto_separado(txt='sftgre', isseparado=False, ubix=690, txtsize=25, ubiy=865, canv=can)
+can = texto_separado(txt='sftgre', isseparado=False, ubix=840, txtsize=25, ubiy=865, canv=can)
+
+can = texto_separado(txt='sftgre', isseparado=False, ubix=220, txtsize=25, ubiy=822, canv=can)
+can = texto_separado(txt='sftgre', isseparado=False, ubix=380, txtsize=25, ubiy=822, canv=can)
+can = texto_separado(txt='sftgre', isseparado=False, ubix=530, txtsize=25, ubiy=822, canv=can)
+can = texto_separado(txt='sftgre', isseparado=False, ubix=690, txtsize=25, ubiy=822, canv=can)
+can = texto_separado(txt='sftgre', isseparado=False, ubix=840, txtsize=25, ubiy=822, canv=can)
+
+can = texto_separado(txt='sftgre', isseparado=False, ubix=220, txtsize=25, ubiy=777, canv=can)
+can = texto_separado(txt='sftgre', isseparado=False, ubix=380, txtsize=25, ubiy=777, canv=can)
+can = texto_separado(txt='sftgre', isseparado=False, ubix=530, txtsize=25, ubiy=777, canv=can)
+can = texto_separado(txt='sftgre', isseparado=False, ubix=690, txtsize=25, ubiy=777, canv=can)
+can = texto_separado(txt='sftgre', isseparado=False, ubix=840, txtsize=25, ubiy=777, canv=can)
+
+can = texto_separado(txt='sftgre', isseparado=False, ubix=220, txtsize=25, ubiy=732, canv=can)
+can = texto_separado(txt='sftgre', isseparado=False, ubix=380, txtsize=25, ubiy=732, canv=can)
+can = texto_separado(txt='sftgre', isseparado=False, ubix=530, txtsize=25, ubiy=732, canv=can)
+can = texto_separado(txt='sftgre', isseparado=False, ubix=690, txtsize=25, ubiy=732, canv=can)
+can = texto_separado(txt='sftgre', isseparado=False, ubix=840, txtsize=25, ubiy=732, canv=can)
+
+
+can = texto_separado(txt='sftgre', isseparado=False, txtsize=25, ubix=530, ubiy=673, canv=can)
+
+can = texto_separado(txt='sftgre', isseparado=False, ubix=220, txtsize=25, ubiy=615, canv=can)
+can = texto_separado(txt='sftgre', isseparado=False, ubix=380, txtsize=25, ubiy=615, canv=can)
+can = texto_separado(txt='sftgre', isseparado=False, ubix=530, txtsize=25, ubiy=615, canv=can)
+can = texto_separado(txt='sftgre', isseparado=False, ubix=690, txtsize=25, ubiy=615, canv=can)
+can = texto_separado(txt='sftgre', isseparado=False, ubix=840, txtsize=25, ubiy=615, canv=can)
+
+can = texto_separado(txt='sftgre', isseparado=False, ubix=220, txtsize=25, ubiy=570, canv=can)
+can = texto_separado(txt='sftgre', isseparado=False, ubix=380, txtsize=25, ubiy=570, canv=can)
+can = texto_separado(txt='sftgre', isseparado=False, ubix=530, txtsize=25, ubiy=570, canv=can)
+can = texto_separado(txt='sftgre', isseparado=False, ubix=690, txtsize=25, ubiy=570, canv=can)
+can = texto_separado(txt='sftgre', isseparado=False, ubix=840, txtsize=25, ubiy=570, canv=can)
+
+can = texto_separado(txt='sftgre', isseparado=False, ubix=220, txtsize=25, ubiy=523, canv=can)
+can = texto_separado(txt='sftgre', isseparado=False, ubix=380, txtsize=25, ubiy=523, canv=can)
+can = texto_separado(txt='sftgre', isseparado=False, ubix=530, txtsize=25, ubiy=523, canv=can)
+can = texto_separado(txt='sftgre', isseparado=False, ubix=690, txtsize=25, ubiy=523, canv=can)
+can = texto_separado(txt='sftgre', isseparado=False, ubix=840, txtsize=25, ubiy=523, canv=can)
+
+
+# Loc
 
 ptext = """Lorem ipsum dolor sit amet, consectetur adipisicing elit,
         sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
@@ -601,14 +695,12 @@ p = Paragraph(ptext, style=getSampleStyleSheet()["Normal"])
 p.wrapOn(can, 800, 20)
 p.drawOn(can, 110, 225)
 
+can = texto_separado(txt='17/01/2019', isseparado=False, txtsize=23, ubix=100, ubiy=168, canv=can)
+can = texto_separado(txt='wjfhrutb', isseparado=False, txtsize=23, ubix=300, ubiy=168, canv=can)
+can = texto_separado(txt='sftgre', isseparado=False, txtsize=23, ubix=475, ubiy=168, canv=can)
+can = texto_separado(txt='Jose Flores', isseparado=False, txtsize=23, ubix=645, ubiy=168, canv=can)
+can = texto_separado(txt='Pepe Flores', isseparado=False, txtsize=23, ubix=820, ubiy=168, canv=can)
 
-
-for i in range(0, 600, 30):
-    can.drawString(i, 770, str(i))
-    can.drawString(i, 220, str(i))
-
-for i in range(0, 840, 20):
-    can.drawString(280, i, str(i))
 #                   CUARTAa hoja
 can.showPage()
 
@@ -625,25 +717,22 @@ can = texto_separado(txt='001', isseparado=False, ubix=293, ubiy=1212, canv=can)
 can = texto_separado(txt='sdf', isseparado=False, ubix=390, ubiy=1212, canv=can)
 can = texto_separado(txt='Av.Los incas ...', isseparado=False, ubix=465, ubiy=1212, canv=can)
 
-
 can = texto_separado(txt='17/01/2019', isseparado=False, txtsize=23, ubix=100, ubiy=168, canv=can)
 can = texto_separado(txt='wjfhrutb', isseparado=False, txtsize=23, ubix=300, ubiy=168, canv=can)
 can = texto_separado(txt='sftgre', isseparado=False, txtsize=23, ubix=475, ubiy=168, canv=can)
 can = texto_separado(txt='Jose Flores', isseparado=False, txtsize=23, ubix=645, ubiy=168, canv=can)
 can = texto_separado(txt='Pepe Flores', isseparado=False, txtsize=23, ubix=820, ubiy=168, canv=can)
 
-# imagenes
-#vista_panoramica1
-can.drawImage('iamgen.jpg', 110, 810,400,300)
-#vista_panoramica1
-can.drawImage('iamgen.jpg', 548, 810,400,300)
-#fotografia_interna1
-can.drawImage('iamgen.jpg', 110, 365,400,300)
-#fotografia_interna2
-can.drawImage('iamgen.jpg', 548, 365,400,300)
-
-
-
+# # imagenes
+# #vista_panoramica1
+# can.drawImage('iamgen.jpg', 110, 810,400,300)
+# #vista_panoramica1
+# can.drawImage('iamgen.jpg', 548, 810,400,300)
+# #fotografia_interna1
+# can.drawImage('iamgen.jpg', 110, 365,400,300)
+# #fotografia_interna2
+# can.drawImage('iamgen.jpg', 548, 365,400,300)
+#
 
 
 """
