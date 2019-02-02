@@ -522,6 +522,7 @@ can = texto_separado(txt='Jose Flores', ubix=350, ubiy=34, canv=can)
 can = texto_separado(txt='Pepe Flores', ubix=460, ubiy=33, canv=can)
 # tercera pagina
 
+can.showPage()
 
 can = texto_separado(txt='C12-0000162', ubix=470, ubiy=787, canv=can)
 can = texto_separado(txt='tt-0000162', ubix=470, ubiy=757, canv=can)
@@ -627,7 +628,6 @@ can = texto_separado(txt='Jose Flores', ubix=350, ubiy=33, canv=can)
 can = texto_separado(txt='Pepe Flores', ubix=460, ubiy=33, canv=can)
 
 #                   CUARTAa hoja
-can.showPage()
 
 can.showPage()
 can.setFont("Helvetica", 2)
