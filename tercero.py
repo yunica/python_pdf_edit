@@ -770,6 +770,6 @@ page.mergePage(new_pdf.getPage(3))
 output.addPage(page)
 
 # finally, write "output" to a real file
-outputStream = open("destinoa4v2.pdf", "wb")
+outputStream = open("destinoa4v2old.pdf", "wb")
 output.write(outputStream)
 outputStream.close()
