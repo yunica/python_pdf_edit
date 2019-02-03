@@ -302,7 +302,7 @@ can = texto_separado(txt='cota fondo .', ubix=455, ubiy=590, canv=can)
 # datos fisicos   -------  tipo buzon
 olist = Lista(choise=tipo_buzon_choice, lubix=[46, 46, 46, 143, 143, 143, 243],
               lubiy=[507, 494, 481, 507, 494, 481, 507], text='OTRO', otro=True,
-              ubixotro=276, ubiyotro=246, otrotext='asdasdasd')
+              ubixotro=273, ubiyotro=509, otrotext='asdasdasd')
 olist.crear_bloque_especial()
 if olist.get_punto():
     can.drawString(olist.get_punto().ubix, olist.get_punto().ubiy, 'X')
@@ -487,7 +487,7 @@ olist.crear_bloque_vertical()
 if olist.get_punto():
     can.drawString(olist.get_punto().ubix, olist.get_punto().ubiy, 'X')
 # mesa-estado-mesa
-olist = Lista(choise=fuste_mesa_estado_choice, ubix=482, lubiy=[213, 200, 191, 179, 169], text='OTRO', otro=True,
+olist = Lista(choise=fuste_mesa_estado_choice, ubix=481, lubiy=[213, 200, 191, 179, 168], text='OTRO', otro=True,
               ubixotro=485, ubiyotro=155, otrotext='asdasdasd')
 olist.crear_bloque_vertical()
 if olist.get_punto():
@@ -528,7 +528,7 @@ can = texto_separado(txt='C12-0000162', ubix=470, ubiy=787, canv=can)
 can = texto_separado(txt='tt-0000162', ubix=470, ubiy=757, canv=can)
 
 
-list_estado = 'FUNCIONANDO,COLMATADO (ATORADO),SEDIMENTADO,CON ESCOMBROS/BASURA'.split(',')
+list_estado = 'FUNCIONANDO,COLMATADO (ATORADO),SEDIMENTADO,CON ESCOMBROS/BASURA,OTRO'.split(',')
 if list_estado:
     for i in list_estado:
         olist = Lista(choise=estado_buzon_choice, lubix=[57, 57, 145, 145, 238],
@@ -630,26 +630,7 @@ can = texto_separado(txt='Pepe Flores', ubix=460, ubiy=33, canv=can)
 #                   CUARTAa hoja
 
 can.showPage()
-can.setFont("Helvetica", 2)
-for i in range(0, 590, 5):
-    can.drawString(i, 700, str(i))
-    can.drawString(i, 550, str(i))
-    can.drawString(i, 460, str(i))
-    can.drawString(i, 360, str(i))
-    can.drawString(i, 180, str(i))
-    can.drawString(i, 100, str(i))
-# x
-can.setFont("Helvetica", 3)
-for i in range(0, 830, 4):
-    can.drawString(35, i, str(i))
-    can.drawString(180, i, str(i))
-    can.drawString(350, i, str(i))
-    can.drawString(390, i, str(i))
-    can.drawString(480, i, str(i))
-    can.drawString(450, i, str(i))
-    can.drawString(820, i, str(i))
-# Numero de ficha
-# Numero de ficha
+
 can = texto_separado(txt='C12-0000162', ubix=470, ubiy=778, canv=can)
 can = texto_separado(txt='tt-0000162', ubix=470, ubiy=746, canv=can)
 # Localizacion
