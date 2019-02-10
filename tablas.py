@@ -1,122 +1,129 @@
-from sqlite3 import connect
-
 from datetime import datetime
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import inch, mm
 from reportlab.lib.pagesizes import letter
-from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer, Table, TableStyle
+from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer, Table, TableStyle, Image
 from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
-from reportlab.lib.colors import black, purple, white
+from reportlab.lib.colors import black, purple, white, gray
 from reportlab.pdfgen import canvas
 
 
 # ======================= CLASE reportePDF =========================
 
 class reportePDF(object):
-    """Exportar una lista de diccionarios a una tabla en un
-       archivo PDF."""
-
-    def __init__(self, titulo, cabecera, datos, nombrePDF):
+    def __init__(self, titulo, datos, nombre_pdf):
         super(reportePDF, self).__init__()
-
         self.titulo = titulo
-        self.cabecera = cabecera
+        self.cabecera = ('N°', 'CÓDIGO', 'NOMBRE', 'APELLIDO PATERNO', 'APELLIDO PATERNO', 'FIRMA', 'HUELLA')
         self.datos = datos
-        self.nombrePDF = nombrePDF
+        self.nombre_pdf = nombre_pdf
 
         self.estilos = getSampleStyleSheet()
 
     @staticmethod
-    def _encabezadoPiePagina(canvas, archivoPDF):
+    def _encabezado_pie_pagina(canvas, archivoPDF):
         """Guarde el estado de nuestro lienzo para que podamos aprovecharlo"""
 
         canvas.saveState()
         estilos = getSampleStyleSheet()
 
-        alineacion = ParagraphStyle(name="alineacion", alignment=TA_RIGHT,
-                                    parent=estilos["Normal"])
+        # alineacion = ParagraphStyle(name="alineacion", alignment=TA_RIGHT,
+        #                             parent=estilos["Normal"])
+        #
+        # # Encabezado
+        # encabezadoNombre = Paragraph("Andres Niño 1.0", estilos["Normal"])
+        # anchura, altura = encabezadoNombre.wrap(archivoPDF.width, archivoPDF.topMargin)
+        # encabezadoNombre.drawOn(canvas, archivoPDF.leftMargin, 736)
 
-        # Encabezado
-        encabezadoNombre = Paragraph("Andres Niño 1.0", estilos["Normal"])
-        anchura, altura = encabezadoNombre.wrap(archivoPDF.width, archivoPDF.topMargin)
-        encabezadoNombre.drawOn(canvas, archivoPDF.leftMargin, 736)
-
-        fechaReporte = str(datetime.today())
-
-        encabezadoFecha = Paragraph(fechaReporte, alineacion)
-        anchura, altura = encabezadoFecha.wrap(archivoPDF.width, archivoPDF.topMargin)
-        encabezadoFecha.drawOn(canvas, archivoPDF.leftMargin, 736)
+        # fechaReporte = str(datetime.today())
+        #
+        # encabezadoFecha = Paragraph(fechaReporte, alineacion)
+        # anchura, altura = encabezadoFecha.wrap(archivoPDF.width, archivoPDF.topMargin)
+        # encabezadoFecha.drawOn(canvas, archivoPDF.leftMargin, 736)
 
         # Pie de página
-        piePagina = Paragraph("Reporte generado por Andres Niño.", estilos["Normal"])
+        piePagina = Paragraph("Fecha de impresión: {}".format(datetime.today().__str__()), estilos["Normal"])
         anchura, altura = piePagina.wrap(archivoPDF.width, archivoPDF.bottomMargin)
         piePagina.drawOn(canvas, archivoPDF.leftMargin, 15 * mm + (0.2 * inch))
 
         # Suelta el lienzo
         canvas.restoreState()
 
+    @staticmethod
+    def _encabezado(canvas, archivoPDF):
+        """Guarde el estado de nuestro lienzo para que podamos aprovecharlo"""
+
+        canvas.saveState()
+        estilos = getSampleStyleSheet()
+
+        # encabezado imagen
+        encabezado_imagen = Image("LOGOCONDORCUNCA-min.png", 150, 169.63)
+        anchura, altura = encabezado_imagen.wrap(archivoPDF.width, archivoPDF.topMargin)
+        encabezado_imagen.drawOn(canvas, 200, 600)
+
+        # Suelta el lienzo
+        canvas.restoreState()
+
     def convertirDatos(self):
-        """Convertir la lista de diccionarios a una lista de listas para crear
-           la tabla PDF."""
 
-        estiloEncabezado = ParagraphStyle(name="estiloEncabezado", alignment=TA_LEFT,
-                                          fontSize=10, textColor=white,
-                                          fontName="Helvetica-Bold",
-                                          parent=self.estilos["Normal"])
+        estiloEncabezado = ParagraphStyle(name="estiloEncabezado", alignment=TA_CENTER, fontSize=10, textColor=black,
+                                          fontName="Helvetica-Bold", parent=self.estilos["Normal"])
 
-        estiloNormal = self.estilos["Normal"]
-        estiloNormal.alignment = TA_LEFT
+        estiloCuerpo = ParagraphStyle(name="estiloCuerpo", alignment=TA_LEFT, fontSize=9, textColor=black,
+                                      fontName="Helvetica", parent=self.estilos["Normal"])
 
-        claves, nombres = zip(*[[k, n] for k, n in self.cabecera])
+        encabezado = [Paragraph(i, estiloEncabezado) for i in self.cabecera]
+        cuerpo = [(Paragraph(j, estiloCuerpo) for j in i) for i in self.datos]
 
-        encabezado = [Paragraph(nombre, estiloEncabezado) for nombre in nombres]
-        nuevosDatos = [tuple(encabezado)]
-
-        for dato in self.datos:
-            nuevosDatos.append([Paragraph(str(dato[clave]), estiloNormal) for clave in claves])
-
-        return nuevosDatos
+        return [encabezado] + cuerpo
 
     def Exportar(self):
         """Exportar los datos a un archivo PDF."""
 
-        alineacionTitulo = ParagraphStyle(name="centrar", alignment=TA_CENTER, fontSize=13,
-                                          leading=10, textColor=purple,
-                                          parent=self.estilos["Heading1"])
-
+        alineacionTitulo = ParagraphStyle(name="centrar", alignment=TA_CENTER, fontSize=12,
+                                          leading=15, textColor=black, parent=self.estilos["Heading1"])
+        alineacionSubTitulo = ParagraphStyle(name="centrar", alignment=TA_CENTER, fontSize=10,
+                                             leading=15, textColor=black, parent=self.estilos["Normal"])
+        alineacionSubTitulo2 = ParagraphStyle(name="centrar", alignment=TA_CENTER, fontSize=10,
+                                              leading=15, textColor=black, spaceAfter=0,
+                                              parent=self.estilos["Heading1"])
         self.ancho, self.alto = letter
 
         convertirDatos = self.convertirDatos()
+        rangoanho = (self.ancho - 100)
+        print(rangoanho)
 
         tabla = Table(convertirDatos, colWidths=(self.ancho - 100) / len(self.cabecera), hAlign="CENTER")
         tabla.setStyle(TableStyle([
-            ("BACKGROUND", (0, 0), (-1, 0), purple),
+            ("BACKGROUND", (0, 0), (-1, 0), gray),
             ("ALIGN", (0, 0), (0, -1), "LEFT"),
             ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),  # Texto centrado y alineado a la izquierda
-            ("INNERGRID", (0, 0), (-1, -1), 0.50, black),  # Lineas internas
+            ("INNERGRID", (0, 0), (-1, -1), 0.4, black),  # Lineas internas
             ("BOX", (0, 0), (-1, -1), 0.25, black),  # Linea (Marco) externa
         ]))
 
         historia = []
-        historia.append(Paragraph(self.titulo, alineacionTitulo))
+        historia.append(Image('LOGOCONDORCUNCA-min.png', 90, 101.78))
+        historia.append(
+            Paragraph("ESCUELA SUPERIOR DE FORMACIÓN ARTÍSTICA PUBLICA “CONDORCUNCA” AYACUCHO", alineacionTitulo))
+        historia.append(Paragraph("RANGO UNIVERSITARIO LEY 29696", alineacionSubTitulo))
+        historia.append(Paragraph("CREACIÓN R.M. N.º 1598 DEL 18/02/1957 – REINSCRIPCIÓN  D.S. N.º 017-2002-ED",
+                                  alineacionSubTitulo))
+
+        historia.append(Spacer(1, 0.09 * inch))
+        historia.append(Paragraph(self.titulo, alineacionSubTitulo2))
         historia.append(Spacer(1, 0.16 * inch))
         historia.append(tabla)
 
-        archivoPDF = SimpleDocTemplate(self.nombrePDF, leftMargin=50, rightMargin=50, pagesize=letter,
-                                       title="Reporte PDF", author="Andres Niño")
+        archivoPDF = SimpleDocTemplate(self.nombre_pdf, leftMargin=50, rightMargin=50, pagesize=letter, topMargin=30,
+                                       title="ReportePostulantes", author="Junior Flores", )
 
         try:
-            archivoPDF.build(historia, onFirstPage=self._encabezadoPiePagina,
-                             onLaterPages=self._encabezadoPiePagina,
-                             canvasmaker=numeracionPaginas)
+            archivoPDF.build(historia, onLaterPages=self._encabezado_pie_pagina, canvasmaker=numeracionPaginas)
+            return archivoPDF
 
-            # +------------------------------------+
-            return "Reporte generado con éxito."
-        # +------------------------------------+
-        except PermissionError:
-            # +--------------------------------------------+
-            return "Error inesperado: Permiso denegado."
-        # +--------------------------------------------+
+        except Exception as e:
+            return None
 
 
 # ================== CLASE numeracionPaginas =======================
@@ -131,7 +138,6 @@ class numeracionPaginas(canvas.Canvas):
         self._startPage()
 
     def save(self):
-        """Agregar información de la página a cada página (página x de y)"""
         numeroPaginas = len(self._saved_page_states)
         for state in self._saved_page_states:
             self.__dict__.update(state)
@@ -146,26 +152,16 @@ class numeracionPaginas(canvas.Canvas):
     # ===================== FUNCIÓN generarReporte =====================
 
 
-def generarReporte():
-    datos = [{"DNI": "111080{}".format(i), "NOMBRE": "Andres", "APELLIDO": "Niño", "FECHA_NACIMIENTO": "06/06/2019"} for
-             i in range(0, 150)]
+# ================== EJECUTAR =======================
 
+datos = [(str(i).zfill(3), "19137080414354", "JUNIOR GROVER", 'FLORES', 'MARTINEZ',) for i in range(0, 50)]
 
-    titulo = "LISTADO DE USUARIOS"
+titulo = "LISTA DE POSTULANTES PARA CEA ESPECIALIDAD GUITARRA MODALIDAD PRIMERO Y SEGUNDOS PEUSTOS HIJOS DE LAS MIRE LRE"
 
-    cabecera = (
-        ("DNI", "D.N.I"),
-        ("NOMBRE", "NOMBRE"),
-        ("APELLIDO", "APELLIDO"),
-        ("FECHA_NACIMIENTO", "FECHA DE NACIMIENTO"),
-    )
+# cabecera = ('N°', 'CÓDIGO', 'DNI', 'NOMBRE', 'APELLIDO PATERNO', 'APELLIDO PATERNO', 'FECHA INSCRIPCION')
 
-    nombrePDF = "ListadoAlumnos.pdf"
+nombre_pdf = "ListadoAlumnos.pdf"
 
-    reporte = reportePDF(titulo, cabecera, datos, nombrePDF).Exportar()
-    print(reporte)
-
+reporte = reportePDF(titulo, datos, nombre_pdf).Exportar()
 
 # ======================== LLAMAR FUNCIÓN ==========================
-
-generarReporte()
