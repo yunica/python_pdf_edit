@@ -53,7 +53,9 @@ can = texto_separado(txt='45236541',   ubix=234, ubiy=484, canv=can)
 can = texto_separado(txt='201936594',   ubix=234, ubiy=467, canv=can)
 can = texto_separado(txt='200.00',  isred=True,txtsize=16, ubix=234, ubiy=450, canv=can)
 can = texto_separado(txt='15/04/2019',   ubix=234, ubiy=416, canv=can)
+can.setFont("Helvetica-Bold", 12)
 
+can = texto_separado(txt='CUENTA N° : 246487 987987 64654 54', isseparado=False ,isred=True,txtsize=14, ubix=238, ubiy=380, canv=can)
 
 
 """

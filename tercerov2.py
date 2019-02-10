@@ -198,8 +198,8 @@ can = texto_separado(txt='001', ubix=75, ubiy=707, canv=can)
 can = texto_separado(txt='001', ubix=109, ubiy=707, canv=can)
 can = texto_separado(txt='001', ubix=145, ubiy=707, canv=can)
 can = texto_separado(txt='sdf', ubix=200, ubiy=707, canv=can)
-can = texto_separado(txt='Av.Los incas con numero # 170', ubix=245, txtsize=7,
-                     ubiy=705, canv=can)
+can = texto_separado(txt='Av.Los incas con numero # 170', ubix=245, txtsize=9,
+                     ubiy=707, canv=can)
 # cotas del esquinero
 can = texto_separado(txt='012 ', ubix=40, ubiy=663, canv=can)
 can = texto_separado(txt='013', ubix=113, ubiy=663, canv=can)
@@ -431,9 +431,9 @@ olist.crear_bloque_vertical()
 if olist.get_punto():
     can.drawString(olist.get_punto().ubix, olist.get_punto().ubiy, 'X')
 # techi_anillo
-techo_anillo = True
+techo_anillo = False
 if techo_anillo:
-    can = texto_separado(txt='X', ubix=461, ubiy=359, canv=can)
+    can = texto_separado(txt='X', ubix=468, ubiy=359, canv=can)
 else:
     can = texto_separado(txt='X', ubix=502, ubiy=359, canv=can)
 
@@ -680,7 +680,7 @@ packet.seek(0)
 new_pdf = PdfFileReader(packet)
 
 # read your existing PDF
-existing_pdf = PdfFileReader(open("fichacatastrov1sther.pdf", "rb"))
+existing_pdf = PdfFileReader(open("fichafinal.pdf", "rb"))
 output = PdfFileWriter()
 
 # add the "watermark" (which is the new pdf) on the existing page
@@ -704,6 +704,6 @@ page.mergePage(new_pdf.getPage(3))
 output.addPage(page)
 
 # finally, write "output" to a real file
-outputStream = open("destinoa4v2sther.pdf", "wb")
+outputStream = open("destinoa4v2stherv2.pdf", "wb")
 output.write(outputStream)
 outputStream.close()
