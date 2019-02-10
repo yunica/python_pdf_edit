@@ -90,10 +90,7 @@ class reportePDF(object):
         self.ancho, self.alto = letter
 
         convertirDatos = self.convertirDatos()
-        rangoanho = (self.ancho - 100)
-        print(rangoanho)
-
-        tabla = Table(convertirDatos, colWidths=(self.ancho - 100) / len(self.cabecera), hAlign="CENTER")
+        tabla = Table(convertirDatos, [40, 90, 80, 76, 76, 75, 75], hAlign="CENTER")
         tabla.setStyle(TableStyle([
             ("BACKGROUND", (0, 0), (-1, 0), gray),
             ("ALIGN", (0, 0), (0, -1), "LEFT"),
