@@ -8,44 +8,6 @@ from reportlab.platypus import Paragraph
 
 # VARIABLES ESTATICAS
 
-resultado_entrevista_choise = ['COMPLETA', 'RECHAZADA', 'AUSENTE', ]
-# 1
-provincia_choices = ['001', '002', ]
-distrito_choices = ['(01) AYACUCHO', '(10) SAN JUAN BAUTISTA', '(16) - ANDRES AVELINO CACERES', 'HUANTA']
-
-localidad_choices = ['(001) HUAMANGA', '002) HUANTA']
-
-# FtbLocalizacionUbicacion
-estado_ficha_choices = ['COMPLETA', 'INCOMPLETA']
-ubicado_choices = ['PISTA', 'BERMA', 'VEREDA', 'OTRO']
-accesibilidad_tipo_choice = ['ASFALTO', 'CONCRETO', 'ADOQUINADO', 'CESPED', 'OTRO']
-# FtbDatosFisicos - buzon
-tipo_buzon_choice = ['ESTANDAR', 'DESARENADOR', 'REJILLA', 'REPARTIDOR', 'VMA', 'ALIVIO', 'OTRO']
-montaje_buzon_choice = ['PRIMARIO', 'SECUNDARIO', 'EMISOR', ]
-tapa_centrico_choice = ['CENTRICO', 'EXCENTRICO']
-# FtbDatosFisicos - tapa
-estado_generico = ['BUENO', 'REGULAR', 'MALO', 'NINGUNO']
-tapa_geometria_choice = ['CIRCULAR', 'CUADRADA', 'OTRO']
-material_tapa_choice = ['HIERRO FUNDIDO', 'CONCRETO ARMADO', 'HIERRO DUCTIL', 'OTRO']
-# FtbDatosFisicos - Anillo
-material_anillo_choice = ['HIERRO FUNDIDO', 'ACERO - PLATINA', 'OTRO']
-estado_anillo_choices = ['BUENO', 'MALO', 'OTRO']
-# FtbDatosFisicos - techo - respiradero
-geometria_techo_choice = ['CIRCULAR', 'CUADRADA']
-
-# FtbDatosFisicos anillo - techo
-techo_anillo_material_choice = ['METALICO', 'OTRO']
-# FtbDatosFisicos - fuste
-fuste_geometria_choice = ['CIRCULAR', 'CUADRADA', 'CONICO']
-fuste_material_choice = ['MAMPOSTERIA', 'CONCRETO ARMADO', 'OTRO']
-# FtbDatosFisicos -  fuste mesa
-fuste_mesa_estado_choice = ['BUENO', 'REGULAR', 'MALO', 'COLAPSADA', 'OTRO']
-# estado buzon
-estado_buzon_choice = ['FUNCIONANDO', 'COLMATADO (ATORADO)', 'SEDIMENTADO', 'CON ESCOMBROS/BASURA', 'OTRO']
-escala_olores_choices = ['ALTO', 'MEDIO', 'BAJO']
-llegada_choice = ['GRAVEDAD', 'BOMBEO']
-cantidad_sedimento_choice = ['ALTA CANTIDAD DE SEDIMENTO', 'MEDIA CANTIDAD DE SEDIMENTO',
-                             'POCA O NULA CANTIDAD DE SEDIMENTO']
 
 def texto_separado(txt=None, isred=False, isseparado=True, txtsize=7, ubix=0, ubiy=0,
                    canv=None):
